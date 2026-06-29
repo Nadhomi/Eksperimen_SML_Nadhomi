@@ -6,22 +6,11 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
 import pandas as pd
  
-def preprocess_data(data, target_column, save_path, file_path):
+def preprocess_data(data, target_column, save_path):
 
     # Menentukan fitur numerik dan kategoris
     numeric_features = data.select_dtypes(include=['float64', 'int64']).columns.tolist()
     categorical_features = data.select_dtypes(include=['object']).columns.tolist()
-    column_names = data.columns
-    
-    # Mendapatkan nama kolom tanpa kolom target
-    column_names = data.columns.drop(target_column)
- 
-    # Membuat DataFrame kosong dengan nama kolom
-    df_header = pd.DataFrame(columns=column_names)
- 
-    # Menyimpan nama kolom sebagai header tanpa data
-    df_header.to_csv(file_path, index=False)
-    print(f"Nama kolom berhasil disimpan ke: {file_path}")
  
     # Pastikan target_column tidak ada di numeric_features atau categorical_features
     if target_column in numeric_features:
